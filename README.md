@@ -2,7 +2,7 @@
 
 [Project Overview](https://github.com/ctmbr/IPGeolocator/tree/shangfii-patch-1#description-overview-ipgeolocator) 
 
-Techlogies Used
+[Techlogies Used](https://github.com/ctmbr/IPGeolocator/blob/shangfii-patch-1/README.md#technologies-used)
 
 [License](https://github.com/shangfii/JS_Quiz/blob/main/LICENSE)
 
