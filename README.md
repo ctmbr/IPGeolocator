@@ -6,7 +6,7 @@
 
 [License](https://github.com/shangfii/JS_Quiz/blob/main/LICENSE)
 
-How to use this project as starter code
+[How to use this project as starter code](https://github.com/ctmbr/IPGeolocator/blob/shangfii-patch-1/README.md#how-to-modify-this-application)
 
 ## Description (Overview): IPGeoLocator
 
