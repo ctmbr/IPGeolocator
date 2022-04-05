@@ -1,8 +1,11 @@
-# IPGeolocator
+## IPGeolocator
 
 Project Overview 
+
 Techlogies Used
+
 [License](https://github.com/shangfii/JS_Quiz/blob/main/LICENSE)
+
 How to use this project as starter code
 
 ## Description (Overview): IPGeoLocator
