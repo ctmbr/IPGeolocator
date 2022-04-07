@@ -3,7 +3,7 @@
 
 // Setting variables to link querySelectors in HTML
 var stateNameIP = document.querySelector('#stateName');
-var cityIP = document.querySelector('#city');
+var cityIP = document.querySelector('#cityName');
 var zipCodeIP = document.querySelector('#zipCode');
 var latIP = document.querySelector('#lat');
 var lonIP = document.querySelector('#lon');
