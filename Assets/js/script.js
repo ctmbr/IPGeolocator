@@ -43,7 +43,7 @@ var getCityGeonameID = function (ownCity, ownState){
     .then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-            // console.log(data);
+            console.log(data);
             
             var cityGeonameIDlink = data._embedded['city:search-results'][0]._links['city:item'].href
                        
@@ -64,7 +64,7 @@ var getNearestUrbanArea = function(cityGeonameIDlink){
     .then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-            // console.log(data);
+            console.log(data);
             
             populationIP.textContent = data.population
             
