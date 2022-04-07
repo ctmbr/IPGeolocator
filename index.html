@@ -9,6 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link rel="stylesheet" href="./Assets/css/style.css" />
+  
   </head>
   <body>
     <header>
@@ -17,60 +18,104 @@
       <p>We’ve got you covered!</p>
       <p>You can also check the quality of life at other locations</p>
     </header>
-    <div class="row col s2 m6 card purple accent-4">
-      <h3 class="row card-title container">Your IP address:</h3>
-      <div class="s6 offset-s6 card-content">
-        <p>RegionName: <span id="regionName"></span></p>
-        <p>City: <span id="city"></span></p>
-        <p>ZipCode: <span id="zipCode"></span></p>
-        <p>lat: <span id="lat"></span></p>
-        <p>lon: <span id="lon"></span></p>
-        <p>Population: <span id="population"></span></p>
-        <p>ISP: <span id="ISP"></span></p>
-      </div>
-    </div>
-    <div class="row col s2 m6 card purple accent-4">
-      <h3 class="row card-title container">
-        Quality of life for your location
-      </h3>
-      <div class="s6 offset-s6 card-content">
-        <p>Life Expectancy</p>
-        <p>Crime Rate</p>
-        <p>Average Income</p>
-        <p>Employment Rate</p>
-        <p>Air Quality</p>
-      </div>
-    </div>
-    <div class="row col s2 m6 card purple accent-4">
-      <h3 class="row card-title container">
-        Quality of life for city searched
-      </h3>
-      <div class="s6 offset-s6 card-content">
-        <p>Life Expectancy</p>
-        <p>Crime Rate</p>
-        <p>Average Income</p>
-        <p>Employment Rate</p>
-        <p>Air Quality</p>
-      </div>
-    </div>
-    <form>
-      <input type="text" placeholder="Check another city" />
-      <button type="submit" class="waves-effect waves-light btn-small">
-        search
-      </button>
-    </form>
-    <div>
-      <div>Search History</div>
-    </div>
-    <div>
-      <!-- Kevin added an anchor tag and href attribute to redirect to aboutUs html page on button click, 4-5-22  -->
-      <a href="./aboutUs.html">
-        <button type="submit" class="waves-effect waves-light btn-small">
-          About Us
-        </button>
-      </a>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./Assets/js/script.js"></script>
-  </body>
+      
+      <h5>Your IP address links to the following information about your location:</h5>
+      <table>
+
+          <tr>
+            <th>State:</th>
+            <td id="stateName">Washington</td> 
+          </tr>
+
+          <tr>
+            <th>City:</th>
+            <td id="cityName">Seattle</td>
+          </tr>
+
+          <tr>
+            <th>Zip Code:</th>
+            <td id="zipCode">98115</td>
+          </tr>
+
+          <tr>
+            <th>Latitude:</th>
+            <td id="lat">47</td>
+          </tr>
+
+          <tr>
+            <th>Longitude:</th>
+            <td id="lon">-122</td>
+          </tr>
+
+          <tr>
+            <th>Population:</th>
+            <td id="population">684,451</td>
+          </tr>
+
+          <tr>
+            <th>Internet Service Provider</th>
+            <td id="ISP">2601.555555.55555.555555</td>
+          </tr>
+        </table>
+      
+        <h5>The Quality of Life for your location is:</h5>
+      <table>
+
+          <tr>
+            <th>Life Expectancy:</th>
+            <td id="presentLoc_LifeExp">76 years</td> 
+          </tr>
+
+          <tr>
+            <th>Crime Rate:</th>
+            <td id="presentLoc_CrimeRate">Seattle</td>
+          </tr>
+
+          <tr>
+            <th>Average Income</th>
+            <td id="presentLoc_AvgInc">98115</td>
+          </tr>
+
+          <tr>
+            <th>Employment Rate:</th>
+            <td id="presentLoc_EmpRate">47</td>
+          </tr>
+
+          <tr>
+            <th>Air Quality:</th>
+            <td id="presentLoc_AirQual">-122</td>
+          </tr>
+
+        </table>
+
+      <h5>The Quality of Life for the City you searched is:</h5>
+      <table>
+
+          <tr>
+            <td>Life Expectancy:</td>
+            <td id="citySearched_LifeExp">76 years</td> 
+          </tr>
+
+          <tr>
+            <td>Crime Rate:</td>
+            <td id="citySearched_CrimeRate">Seattle</td>
+          </tr>
+
+          <tr>
+            <td>Average Income</td>
+            <td id="citySearched_AvgInc">98115</td>
+          </tr>
+
+          <tr>
+            <td>Employment Rate:</td>
+            <td id="citySearched_EmpRate">47</td>
+          </tr>
+
+          <tr>
+            <td>Air Quality:</td>
+            <td id="citySearched_AirQual">-122</td>
+          </tr>
+
+        </table>
+   </body>
 </html>
