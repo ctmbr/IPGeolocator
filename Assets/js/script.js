@@ -10,6 +10,26 @@ var lonIP = document.querySelector('#lon');
 var ISP = document.querySelector('#ISP');
 var populationIP = document.querySelector('#population');
 
+// Setting variables to link to querySelectors in the HTML table for Quality of life for present location
+
+var presentLoc_LifeExpIP = document.querySelector('#presentLoc_LifeExp');
+var presentLoc_CrimRateIP = document.querySelector('#presentLoc_CrimeRate');
+var presentLoc_AvgIncIP = document.querySelector('#presentLoc_AvgInc');
+var presentLoc_EmpRateIP = document.querySelector('#presentLoc_EmpRate');
+var presentLoc_AirQual = document.querySelector('#presentLoc_AirQual');
+
+// Setting variable to link to querySelectors in the HTML table for Quality of life for City Searched
+
+var citySearched_LifeExpIP = document.querySelector('#citySearched_LifeExp');
+var citySearched_CrimRateIP = document.querySelector('#citySearched_CrimeRate');
+var citySearched_AvgIncIP = document.querySelector('#citySearched_AvgInc');
+var citySearched_EmpRateIP = document.querySelector('#citySearched_EmpRate');
+var citySearched_AirQual = document.querySelector('#citySearched_AirQual');
+
+
+
+
+
 // Fetch call at PageLoad to obtain user's IP address and relevant information
 var freeGeoIP = 'https://api.freegeoip.app/json/?apikey=74824920-b48a-11ec-aeb7-87f5f0610281';
 
