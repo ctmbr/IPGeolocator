@@ -177,3 +177,7 @@ var formSubmitHandler = function (event) {
 
   userFormEl.addEventListener('submit', formSubmitHandler);
 
+//   The following jQuery code is required for the Materialize drop down menu to work, per Materialize documnentation.
+  $('.dropdown-trigger').dropdown();
+
+

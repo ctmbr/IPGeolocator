@@ -161,8 +161,27 @@
       <br />
       <br />
 
-      <div>Search History</div>
-    </div>
+   <!-- Materialize/HTML dropdown menu (Materialize evidently overwrites basic HTML select tag) -->
+
+   <!-- Dropdown Trigger -->
+   
+   <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Click for Materialize Dropdown Menu</a>
+
+   <!-- Dropdown Structure -->
+   <ul id='dropdown1' class='dropdown-content'>
+     <li><a href="#!">Seattle</a></li>
+     <li><a href="#!">Dallas</a></li>
+     <li><a href="#!">Miami</a></li>
+   </ul>
+
+   <br>
+   <br>
+
+    <div>Search History: local storage container</div>
+
+    <br>
+    <br>
+    
     <div>
       <!-- Kevin added an anchor tag and href attribute to redirect to aboutUs html page on button click, 4-5-22  -->
       <a href="./aboutUs.html">
@@ -171,6 +190,8 @@
         </button>
       </a>
     </div>
+    <!-- We need to add JQuery link to HTML file if we want Materialize drop down menu to work, because materialize evidently overwrites HTML select tag, which is needed to make a basic HTML r -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./Assets/js/script.js" type="text/javascript"></script>
   </body>
