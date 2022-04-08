@@ -18,7 +18,6 @@
         <p>Want data on the Quality of life of your current location?</p>
         <p>We’ve got you covered!</p>
         <p>You can also check the quality of life at other locations</p>
-
       </div>
     </header>
     <div class="container">
@@ -26,7 +25,6 @@
         <div class="col s3 offset-s1 container teal darken-4">
           <h3 class="card-title blue-text">Your IP address:</h3>
           <div class="card-content card-panel teal lighten-2">
-
             <table>
               <tr>
                 <th>State:</th>
@@ -63,7 +61,6 @@
                 <td id="ISP">2601.555555.55555.555555</td>
               </tr>
             </table>
-
           </div>
         </div>
         <div class="row offset-s1 valign-wrapper">
@@ -137,19 +134,34 @@
       </div>
 
       <!-- Form for user to input a city name and state to search for -->
-    <div>
-      <h6>Check for information about another City:</h6>
-        <form id="user-form" name="user-form">
-         <input name="city-search-name" id="city-search-name" type="text" autofocus="true" class="form-input" placeholder = "Type the name of a City here." />
-         <input name="state-search-name" id="state-search-name" type="text" autofcus="true" class="form-input" placeholder = "Type the name the State the City is in here."/>
-         <button type="submit">Check for the selected City and State!</button>
+      <div class="container teal darken-4">
+        <h4 class="card-title blue-text">Check another City</h6>
+<div class="card-content card-panel teal lighten-2">       
+          <form id="user-form" name="user-form">
+          <input
+            name="city-search-name"
+            id="city-search-name"
+            type="text"
+            autofocus="true"
+            class="form-input"
+            placeholder="Enter City"
+          />
+          <input
+            name="state-search-name"
+            id="state-search-name"
+            type="text"
+            autofcus="true"
+            class="form-input"
+            placeholder="Enter State"
+          />
+          <button type="submit" class="waves-effect waves-light btn-small">Check the selected City and State!</button>
         </form>
-    </div>
-    <br>
-    <br>
-    
-      
-    <div>Search History</div>
+      </div>
+      </div>
+      <br />
+      <br />
+
+      <div>Search History</div>
     </div>
     <div>
       <!-- Kevin added an anchor tag and href attribute to redirect to aboutUs html page on button click, 4-5-22  -->
