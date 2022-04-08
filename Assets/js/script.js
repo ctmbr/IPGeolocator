@@ -35,8 +35,8 @@ fetch(freeGeoIP)
         if (response.ok) {
             response.json().then(function (data) {
             //Populating IP address and relevant info to HTML 
-            console.log(data);
-            console.log(data.region_name)
+            // console.log(data);
+            // console.log(data.region_name)
             stateNameIP.textContent = data.region_name;
             cityIP.textContent = data.city;
             zipCodeIP.textContent = data.zip_code;
@@ -65,7 +65,7 @@ var getCityGeonameID = function (ownCity, ownState){
             if (response.ok) {
                 response.json().then(function (data) {
                 // Saving ID link to a variable
-                console.log(data);            
+                // console.log(data);            
                 var cityGeonameIDlink = data._embedded['city:search-results'][0]._links['city:item'].href
                 //Passing ID to next fetch function, which will get nearest Urban Area/city to IP address city    
                 getNearestUrbanArea(cityGeonameIDlink)
@@ -78,6 +78,7 @@ var getCityGeonameID = function (ownCity, ownState){
             console.log('Fetch Error -', error);
     });
 }
+
 //Fetch function for getting nearest Urban Area/city to IP address city
 var getNearestUrbanArea = function(cityGeonameIDlink){
     fetch(cityGeonameIDlink)
@@ -115,44 +116,82 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
             console.log('Fetch Error -', error);
         });
 }
-// Creating dropdown menu for user to obtain other Teleport city scores
-// let dropdown = document.getElementById('city-dropdown');
-// dropdown.length = 0;
+// Fetch function for obtaining quality of life Teleport scores for Searched City
+var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
+    fetch(urbanArea+'scores/')
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                console.log(data);
+                });
+            } else {
+                console.log(response.statusText);
+            }
+        })
+        .catch(function (error) {
+            console.log('Fetch Error -', error);
+        });
+}
+// Creating autocomplete list with Teleport cities that have quality of life scores
+// First fetch all available cities from Teleport
 
-// let defaultOption = document.createElement('option');
-// defaultOption.text = 'Choose a City';
+const url = 'https://api.teleport.org/api/urban_areas/';
 
-// dropdown.add(defaultOption);
-// dropdown.selectedIndex = 0;
-
-// const url = 'https://developers.teleport.org/assets/urban_areas.json';
-
-const url = "https://api.teleport.org/api/cities/"
+// Object for storing all cities. This will be the data object used in autocomple feature
+var availTelCitiesObj = {};
+// Object for storing all cities and their URL for quality of life scores
+var availTelCitiesHref = {};
 
 fetch(url)  
     .then(function(response) {  
         if (response.ok) {  
             response.json().then(function(data) {
-                console.log("list of Teleport cities: ", data);
-                
+                // extracting important information from data
+                let teleportCitiesArray =data._links['ua:item'];
+                // Using a FOR LOOP to create objects
+                for (let i = 0; i < teleportCitiesArray.length; i++) {
+                    availTelCitiesObj[teleportCitiesArray[i].name] = null
+                    
+                    availTelCitiesHref[teleportCitiesArray[i].name] = teleportCitiesArray[i].href 
+    	        }  
             });
-//             // let option;
-//             //     for (let i = 0; i < data.length; i++) {
-//             //     option = document.createElement('option');
-//             //     option.text = data[i].name;
-//             //     option.value = data[i].abbreviation;
-//             //     dropdown.add(option);
-//     	    //     }    
-            // });
-//       } else {
-//             console.log(response.statusText);
-//       }
-//     })  
-    // .catch(function(error) {  
-    //     console.error('Fetch Error -', error);  
-    // });
+      } else {
+            console.log(response);
+      }
+    })  
+    .catch(function(error) {  
+        console.error('Fetch Error -', error);  
+    });
 
+
+// Creating function to build autocomple list
+var autoCompleListofCities = function() {
+    var availCities = document.querySelectorAll('.autocomplete');
     
+    console.log(availTelCitiesObj);
+    console.log(availTelCitiesHref);
+    console.log(typeof(availTelCitiesHref));
+    console.log(availTelCitiesHref.Aarhus); //Expected console log result to be Aarhus' URL. BUT THATS NOT THE CASE RIGHT NOW :-(
+
+    // Materialize CSS code for generating autocomple list
+    M.Autocomplete.init(availCities,{
+        // assigning all Teleport cities Object to be used as the data/autocomplete list
+        data: availTelCitiesObj,
+        limit: 7,
+        //Callback will take the city selected by the User and get the href value (URL) from the availTelCitiesHref object. THIS PART IS NOT WORKING AS EXPECTED. SEE LINE 174
+        onAutocomplete: function(city){
+        console.log(city);
+        var hrefCity = availTelCitiesHref.city;
+        // passing the city's url to function that will fetch quality of life scores.
+        getSearchedUrbanAreaQualOfLifeScores(hrefCity);
+        
+        }
+    });
+   
+  }
+// Materialize CSS event listener for autocomple list
+document.addEventListener('DOMContentLoaded', autoCompleListofCities);
+
     
 // copy user input for city and state to javascript variables on click of submit button.
 var formSubmitHandler = function (event) {
