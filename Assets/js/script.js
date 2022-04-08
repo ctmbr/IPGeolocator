@@ -127,11 +127,15 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
 
 // const url = 'https://developers.teleport.org/assets/urban_areas.json';
 
-// fetch(url)  
-//     .then(function(response) {  
-//         if (response.ok) {  
-//             response.json().then(function(data) {
-//                 console.log(data);  
+const url = "https://api.teleport.org/api/cities/"
+
+fetch(url)  
+    .then(function(response) {  
+        if (response.ok) {  
+            response.json().then(function(data) {
+                console.log("list of Teleport cities: ", data);
+                
+            });
 //             // let option;
 //             //     for (let i = 0; i < data.length; i++) {
 //             //     option = document.createElement('option');
@@ -139,20 +143,16 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
 //             //     option.value = data[i].abbreviation;
 //             //     dropdown.add(option);
 //     	    //     }    
-//             });
+            // });
 //       } else {
 //             console.log(response.statusText);
 //       }
 //     })  
-//     .catch(function(error) {  
-//         console.error('Fetch Error -', error);  
-//     });
+    // .catch(function(error) {  
+    //     console.error('Fetch Error -', error);  
+    // });
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var elems = document.querySelectorAll('.dropdown-trigger');
-    //     var instances = M.Dropdown.init(elems, options);
-    //   });
-    //   instance.open();
+    
     
 // copy user input for city and state to javascript variables on click of submit button.
 var formSubmitHandler = function (event) {
