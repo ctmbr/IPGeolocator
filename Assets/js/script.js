@@ -1,5 +1,6 @@
-// var userFormEl = document.querySelector('#user-form');
-// var citySearchEl = document.querySelector('#citySearch')
+var userFormEl = document.querySelector('#user-form');
+var citySearchEl = document.querySelector('#city-search-name');
+var stateSearchEl = document.querySelector('#state-search-name');
 
 // Setting variables to link querySelectors in HTML
 var stateNameIP = document.querySelector('#stateName');
@@ -25,11 +26,7 @@ var citySearched_CrimRateIP = document.querySelector('#citySearched_CrimeRate');
 var citySearched_AvgIncIP = document.querySelector('#citySearched_AvgInc');
 var citySearched_EmpRateIP = document.querySelector('#citySearched_EmpRate');
 var citySearched_AirQual = document.querySelector('#citySearched_AirQual');
-
-
-
-
-
+    
 // Fetch call at PageLoad to obtain user's IP address and relevant information
 var freeGeoIP = 'https://api.freegeoip.app/json/?apikey=74824920-b48a-11ec-aeb7-87f5f0610281';
 
@@ -157,21 +154,26 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
     //   });
     //   instance.open();
     
+// copy user input for city and state to javascript variables on click of submit button.
+var formSubmitHandler = function (event) {
+    event.preventDefault();
+  
+    var citySearchName = citySearchEl.value.trim();
+    var stateSearchName = stateSearchEl.value.trim();
 
-// var formSubmitHandler = function (event) {
-//     event.preventDefault();
+    console.log(citySearchName);
+    console.log(stateSearchName);
   
-//     var cityName = citySearchEl.value.trim();
-  
-//     if (cityName) {
-//       getCityQualityInfo(cityName);
+    if (citySearchName && stateSearchName) {
+    getCityGeonameID(citySearchName, stateSearchName);
   
 //     //   cityContainerEl.textContent = '';
 //       citySearchEl.value = '';
-//     } else {
-//       alert('Please enter a city name');
-//     }
-//   };
+    } else {
+      alert('Please enter a valid city and state');
+    }
+    };
 
 
-//   userFormEl.addEventListener('submit', formSubmitHandler);
+  userFormEl.addEventListener('submit', formSubmitHandler);
+
