@@ -66,34 +66,38 @@
         </div>
         <div class="row offset-s1 valign-wrapper">
           <div class="col s3 container teal darken-4">
-            <h3 class="card-title white-text">
-              Quality of life for your location
+            <h3 id="nearestTeleportCity" class="card-title white-text">
+              Quality of Life Scores for: <span id="nearest-Teleport-City"></span>
             </h3>
             <div class="card-content card-panel teal lighten-2">
               <table>
                 <tr>
-                  <th>Life Expectancy:</th>
-                  <td id="presentLoc_LifeExp">76 years</td>
+                  <th>Cost of Living:</th>
+                  <td id="presentLoc_CostLiving">76 years</td>
                 </tr>
 
                 <tr>
-                  <th>Crime Rate:</th>
-                  <td id="presentLoc_CrimeRate">Seattle</td>
+                  <th>Safety:</th>
+                  <td id="presentLoc_Safety">Seattle</td>
                 </tr>
 
                 <tr>
-                  <th>Average Income</th>
-                  <td id="presentLoc_AvgInc">98115</td>
+                  <th>Health Care</th>
+                  <td id="presentLoc_HealthCare">98115</td>
                 </tr>
 
                 <tr>
-                  <th>Employment Rate:</th>
-                  <td id="presentLoc_EmpRate">47</td>
+                  <th>Economy:</th>
+                  <td id="presentLoc_Economy">47</td>
                 </tr>
 
                 <tr>
-                  <th>Air Quality:</th>
-                  <td id="presentLoc_AirQual">-122</td>
+                  <th>Leisure & Culture:</th>
+                  <td id="presentLoc_LeisureCulture">-122</td>
+                </tr>
+
+                <tr>
+                  <th>Overall Score: <span id="presentLoc_OverallScore">00</span> out of 100.</th>
                 </tr>
               </table>
             </div>

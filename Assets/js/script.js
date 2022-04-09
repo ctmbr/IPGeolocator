@@ -11,15 +11,17 @@ var lonIP = document.querySelector('#lon');
 var ISP = document.querySelector('#ISP');
 var populationIP = document.querySelector('#population');
 
-// Setting variables to link to querySelectors in the HTML table for Quality of life for present location
+// Setting variables to link to querySelectors in the HTML table for Quality of life Teleport Urban Area closest to present location
 
-var presentLoc_LifeExpIP = document.querySelector('#presentLoc_LifeExp');
-var presentLoc_CrimRateIP = document.querySelector('#presentLoc_CrimeRate');
-var presentLoc_AvgIncIP = document.querySelector('#presentLoc_AvgInc');
-var presentLoc_EmpRateIP = document.querySelector('#presentLoc_EmpRate');
-var presentLoc_AirQual = document.querySelector('#presentLoc_AirQual');
+var nearestTPCity = document.querySelector("#nearest-Teleport-City");
+var presentLoc_CostLivingTP = document.querySelector('#presentLoc_CostLiving');
+var presentLoc_SafetyTP = document.querySelector('#presentLoc_Safety');
+var presentLoc_HealthCareTP = document.querySelector('#presentLoc_HealthCare');
+var presentLoc_LeisureCultureTP = document.querySelector('#presentLoc_LeisureCulture');
+var presentLoc_EconomyTP = document.querySelector('#presentLoc_Economy');
+var presentLoc_OverallScoreTP = document.querySelector('#presentLoc_OverallScore')
 
-// Setting variable to link to querySelectors in the HTML table for Quality of life for City Searched
+// Setting variables to link to querySelectors in the HTML table for Quality of life for City Searched
 
 var citySearched_LifeExpIP = document.querySelector('#citySearched_LifeExp');
 var citySearched_CrimRateIP = document.querySelector('#citySearched_CrimeRate');
@@ -106,7 +108,45 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                console.log(data);
+                console.log("This is the date for nearest urban area/city qualify of life Teleport scores:   ", data);
+
+                console.log("This is the costing of living score for nearest urban location:  ", data.categories[0].score_out_of_10)
+
+
+                // Render the data for the closest city to user's present location to the webpage.
+
+                // First we need to pull the city name form the text tring that is the value for Teleport's "summary" key, because that's the only place the city name seems to appear in data.
+                 
+                    var teleportSummary = data.summary;
+                
+                    // remove all the commas from the summary
+                    var teleportSummaryNoCommas = teleportSummary.replaceAll(',', '');
+                    
+                    // remove all the html p tags from the summary
+                    var teleportSummaryClean = teleportSummaryNoCommas.replaceAll('<p>', '');
+                    console.log(teleportSummaryClean);
+
+                    // pull the first two words from the summary, which in most cases will be city and state or city and country
+                    var teleportUrbanArea = teleportSummaryClean.split(' ').slice(0,2).join(', ');
+                    console.log(teleportUrbanArea);
+
+                // var tele
+                // var y = x.split(' ').slice(0,2);
+
+                // var myPlace = y[0].slice(3);
+                
+                // console.log(myPlace);
+
+
+                
+                nearestTPCity.textContent = teleportUrbanArea;
+                presentLoc_CostLivingTP.textContent = data.categories[1].score_out_of_10;
+                presentLoc_SafetyTP.textContent = data.categories[7].score_out_of_10;
+                presentLoc_HealthCareTP.textContent = data.categories[8].score_out_of_10;
+                presentLoc_EconomyTP.textContent = data.categories[11].score_out_of_10;
+                presentLoc_LeisureCultureTP.textContent = data.categories[14].score_out_of_10;
+                presentLoc_OverallScoreTP.textContent = data.teleport_city_score;
+                
                 });
             } else {
                 console.log(response.statusText);
@@ -132,6 +172,7 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
             console.log('Fetch Error -', error);
         });
 }
+
 // Creating autocomplete list with Teleport cities that have quality of life scores
 // First fetch all available cities from Teleport
 
@@ -170,7 +211,7 @@ var autoCompleListofCities = function() {
     var availCities = document.querySelectorAll('.autocomplete');
     
     // console.log(availTelCitiesObj);
-    // console.log(availTelCitiesHref);
+    console.log(availTelCitiesHref);
     // console.log(typeof(availTelCitiesHref));
     // console.log(availTelCitiesHref.Aarhus); //Expected console log result to be Aarhus' URL. BUT THATS NOT THE CASE RIGHT NOW :-(
 
@@ -222,9 +263,9 @@ var formSubmitHandler = function (event) {
     };
 
 
-  userFormEl.addEventListener('submit', formSubmitHandler);
+//   userFormEl.addEventListener('submit', formSubmitHandler);
 
 //   The following jQuery code is required for the Materialize drop down menu to work, per Materialize documnentation.
-  $('.dropdown-trigger').dropdown();
+//   $('.dropdown-trigger').dropdown();
 
 
