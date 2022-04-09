@@ -152,8 +152,9 @@ fetch(url)
                 for (let i = 0; i < teleportCitiesArray.length; i++) {
                     availTelCitiesObj[teleportCitiesArray[i].name] = null
                     
-                    availTelCitiesHref[teleportCitiesArray[i].name] = teleportCitiesArray[i].href 
-    	        }  
+                    availTelCitiesHref[teleportCitiesArray[i].name] = teleportCitiesArray[i].href;
+    	        }
+                autoCompleListofCities();  
             });
       } else {
             console.log(response);
@@ -168,10 +169,10 @@ fetch(url)
 var autoCompleListofCities = function() {
     var availCities = document.querySelectorAll('.autocomplete');
     
-    console.log(availTelCitiesObj);
-    console.log(availTelCitiesHref);
-    console.log(typeof(availTelCitiesHref));
-    console.log(availTelCitiesHref.Aarhus); //Expected console log result to be Aarhus' URL. BUT THATS NOT THE CASE RIGHT NOW :-(
+    // console.log(availTelCitiesObj);
+    // console.log(availTelCitiesHref);
+    // console.log(typeof(availTelCitiesHref));
+    // console.log(availTelCitiesHref.Aarhus); //Expected console log result to be Aarhus' URL. BUT THATS NOT THE CASE RIGHT NOW :-(
 
     // Materialize CSS code for generating autocomple list
     M.Autocomplete.init(availCities,{
@@ -181,16 +182,23 @@ var autoCompleListofCities = function() {
         //Callback will take the city selected by the User and get the href value (URL) from the availTelCitiesHref object. THIS PART IS NOT WORKING AS EXPECTED. SEE LINE 174
         onAutocomplete: function(city){
         console.log(city);
-        var hrefCity = availTelCitiesHref.city;
+        var hrefCity = '';
+        for (var key in availTelCitiesHref) {
+          if (availTelCitiesHref.hasOwnProperty(key))
+            if(city == key)
+                hrefCity = availTelCitiesHref[key];
+        }
+        // var hrefCity = availTelCitiesHref.city;
         // passing the city's url to function that will fetch quality of life scores.
-        getSearchedUrbanAreaQualOfLifeScores(hrefCity);
+        if(hrefCity != '')
+            getSearchedUrbanAreaQualOfLifeScores(hrefCity);
         
         }
     });
    
   }
 // Materialize CSS event listener for autocomple list
-document.addEventListener('DOMContentLoaded', autoCompleListofCities);
+// document.addEventListener('DOMContentLoaded', autoCompleListofCities);
 
     
 // copy user input for city and state to javascript variables on click of submit button.
