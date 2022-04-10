@@ -17,17 +17,19 @@ var nearestTPCity = document.querySelector("#nearest-Teleport-City");
 var presentLoc_CostLivingTP = document.querySelector('#presentLoc_CostLiving');
 var presentLoc_SafetyTP = document.querySelector('#presentLoc_Safety');
 var presentLoc_HealthCareTP = document.querySelector('#presentLoc_HealthCare');
-var presentLoc_LeisureCultureTP = document.querySelector('#presentLoc_LeisureCulture');
 var presentLoc_EconomyTP = document.querySelector('#presentLoc_Economy');
+var presentLoc_LeisureCultureTP = document.querySelector('#presentLoc_LeisureCulture');
 var presentLoc_OverallScoreTP = document.querySelector('#presentLoc_OverallScore')
 
 // Setting variables to link to querySelectors in the HTML table for Quality of life for City Searched
 
-var citySearched_LifeExpIP = document.querySelector('#citySearched_LifeExp');
-var citySearched_CrimRateIP = document.querySelector('#citySearched_CrimeRate');
-var citySearched_AvgIncIP = document.querySelector('#citySearched_AvgInc');
-var citySearched_EmpRateIP = document.querySelector('#citySearched_EmpRate');
-var citySearched_AirQual = document.querySelector('#citySearched_AirQual');
+var citySearched = document.querySelector("#city-selected-from-dropdown")
+var citySearched_CostLivingIP = document.querySelector('#citySearched_CostLiving');
+var citySearched_SafetyIP = document.querySelector('#citySearched_Safety');
+var citySearched_HealthCareIP = document.querySelector('#citySearched_HealthCare');
+var citySearched_EconomyIP = document.querySelector('#citySearched_Economy');
+var citySearched_LeisureCultureIP = document.querySelector('#citySearched_LeisureCulture');
+var citySearched_OverallScoreTP = document.querySelector('#citySearched_OverallScore');
     
 // Fetch call at PageLoad to obtain user's IP address and relevant information
 var freeGeoIP = 'https://api.freegeoip.app/json/?apikey=74824920-b48a-11ec-aeb7-87f5f0610281';
@@ -115,31 +117,31 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
 
                 // Render the data for the closest city to user's present location to the webpage.
 
-                // First we need to pull the city name form the text tring that is the value for Teleport's "summary" key, because that's the only place the city name seems to appear in data.
+                // // First we need to pull the city name form the text tring that is the value for Teleport's "summary" key, because that's the only place the city name seems to appear in data.
                  
-                    var teleportSummary = data.summary;
+                // if (data.summary) {
+                //     var teleportSummary = data.summary;
                 
-                    // remove all the commas from the summary
-                    var teleportSummaryNoCommas = teleportSummary.replaceAll(',', '');
+                //     // remove all the commas from the summary
+                //     var teleportSummaryNoCommas = teleportSummary.replaceAll(',', '');
                     
-                    // remove all the html p tags from the summary
-                    var teleportSummaryClean = teleportSummaryNoCommas.replaceAll('<p>', '');
-                    console.log(teleportSummaryClean);
+                //     // remove all the html p tags from the summary
+                //     var teleportSummaryClean = teleportSummaryNoCommas.replaceAll('<p>', '');
+                //     console.log(teleportSummaryClean);
 
-                    // pull the first two words from the summary, which in most cases will be city and state or city and country
-                    var teleportUrbanArea = teleportSummaryClean.split(' ').slice(0,2).join(', ');
-                    console.log(teleportUrbanArea);
+                //     // pull the first word from the summary, which in most cases will be city name.
+                //     // If se change .slice(0,1) to .slice(0,2), we can also get the state for US Cities, but this will break for European cities.
+                //     var teleportUrbanArea = teleportSummaryClean.split(' ').slice(0,1).join(', ');
+                //     console.log(teleportUrbanArea);
 
-                // var tele
-                // var y = x.split(' ').slice(0,2);
+                //     // var y = x.split(' ').slice(0,2).join('+');
 
-                // var myPlace = y[0].slice(3);
-                
-                // console.log(myPlace);
+                //     //render the city name to the webpage
+                //     nearestTPCity.textContent = teleportUrbanArea;
+                // }
 
+                            
 
-                
-                nearestTPCity.textContent = teleportUrbanArea;
                 presentLoc_CostLivingTP.textContent = data.categories[1].score_out_of_10;
                 presentLoc_SafetyTP.textContent = data.categories[7].score_out_of_10;
                 presentLoc_HealthCareTP.textContent = data.categories[8].score_out_of_10;
@@ -163,6 +165,36 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
             if (response.ok) {
                 response.json().then(function (data) {
                 console.log(data);
+
+                // Render data for searched city to the webpage
+                // // first have to parse data summary key to pull out name of city from text string
+                // if (data.summary) {
+                //     var teleportSummary_2 = data.summary;
+                
+                //     // remove all the commas from the summary
+                //     var teleportSummaryNoCommas_2 = teleportSummary_2.replaceAll(',', '');
+                    
+                //     // remove all the html p tags from the summary
+                //     var teleportSummaryClean_2 = teleportSummaryNoCommas_2.replaceAll('<p>', '');
+                //     console.log(teleportSummaryClean_2);
+
+                //     // pull the first word from the summary, which in most cases will be city name.
+                //     var teleportUrbanArea_2 = teleportSummaryClean_2.split(' ').slice(0,1).join(', ');
+                //     console.log(teleportUrbanArea_2);
+
+                //     // var y = x.split(' ').slice(0,2).join('+');
+
+                //     //render the city name to the webpage
+                //     citySearched.textContent = teleportUrbanArea_2;
+                // }
+
+                citySearched_CostLivingIP.textContent = data.categories[1].score_out_of_10;
+                citySearched_SafetyIP.textContent = data.categories[7].score_out_of_10;
+                citySearched_HealthCareIP.textContent = data.categories[8].score_out_of_10;
+                citySearched_EconomyIP.textContent = data.categories[11].score_out_of_10;
+                citySearched_LeisureCultureIP.textContent = data.categories[14].score_out_of_10
+                citySearched_OverallScoreTP.textContent = data.teleport_city_score;
+
                 });
             } else {
                 console.log(response.statusText);
@@ -239,28 +271,28 @@ var autoCompleListofCities = function() {
    
   }
 // Materialize CSS event listener for autocomple list
-// document.addEventListener('DOMContentLoaded', autoCompleListofCities);
+document.addEventListener('DOMContentLoaded', autoCompleListofCities);
 
     
-// copy user input for city and state to javascript variables on click of submit button.
-var formSubmitHandler = function (event) {
-    event.preventDefault();
+// // copy user input for city and state to javascript variables on click of submit button.
+// var formSubmitHandler = function (event) {
+//     event.preventDefault();
   
-    var citySearchName = citySearchEl.value.trim();
-    var stateSearchName = stateSearchEl.value.trim();
+//     var citySearchName = citySearchEl.value.trim();
+//     var stateSearchName = stateSearchEl.value.trim();
 
-    console.log(citySearchName);
-    console.log(stateSearchName);
+//     console.log(citySearchName);
+//     console.log(stateSearchName);
   
-    if (citySearchName && stateSearchName) {
-    getCityGeonameID(citySearchName, stateSearchName);
+//     if (citySearchName && stateSearchName) {
+//     getCityGeonameID(citySearchName, stateSearchName);
   
-//     //   cityContainerEl.textContent = '';
-//       citySearchEl.value = '';
-    } else {
-      alert('Please enter a valid city and state');
-    }
-    };
+// //     //   cityContainerEl.textContent = '';
+// //       citySearchEl.value = '';
+//     } else {
+//       alert('Please enter a valid city and state');
+//     }
+//     };
 
 
 //   userFormEl.addEventListener('submit', formSubmitHandler);
