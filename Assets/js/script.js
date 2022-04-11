@@ -24,11 +24,11 @@ var presentLoc_OverallScoreTP = document.querySelector('#presentLoc_OverallScore
 // Setting variables to link to querySelectors in the HTML table for Quality of life for City Searched
 
 var citySearched = document.querySelector("#city-selected-from-dropdown")
-var citySearched_CostLivingIP = document.querySelector('#citySearched_CostLiving');
-var citySearched_SafetyIP = document.querySelector('#citySearched_Safety');
-var citySearched_HealthCareIP = document.querySelector('#citySearched_HealthCare');
-var citySearched_EconomyIP = document.querySelector('#citySearched_Economy');
-var citySearched_LeisureCultureIP = document.querySelector('#citySearched_LeisureCulture');
+var citySearched_CostLivingTP = document.querySelector('#citySearched_CostLiving');
+var citySearched_SafetyTP = document.querySelector('#citySearched_Safety');
+var citySearched_HealthCareTP = document.querySelector('#citySearched_HealthCare');
+var citySearched_EconomyTP = document.querySelector('#citySearched_Economy');
+var citySearched_LeisureCultureTP = document.querySelector('#citySearched_LeisureCulture');
 var citySearched_OverallScoreTP = document.querySelector('#citySearched_OverallScore');
     
 // Fetch call at PageLoad to obtain user's IP address and relevant information
@@ -83,6 +83,11 @@ var getCityGeonameID = function (ownCity, ownState){
     });
 }
 
+
+
+console.log("availTelCitiesHref: ", availTelCitiesHref);
+
+
 //Fetch function for getting nearest Urban Area/city to IP address city
 var getNearestUrbanArea = function(cityGeonameIDlink){
     fetch(cityGeonameIDlink)
@@ -110,9 +115,11 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                console.log("This is the date for nearest urban area/city qualify of life Teleport scores:   ", data);
+                console.log("This is the data for nearest urban area/city quality of life Teleport scores:   ", data);
 
                 console.log("This is the costing of living score for nearest urban location:  ", data.categories[0].score_out_of_10)
+
+                console.log(data);
 
 
                 // Render the data for the closest city to user's present location to the webpage.
@@ -138,16 +145,30 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
 
                 //     //render the city name to the webpage
                 //     nearestTPCity.textContent = teleportUrbanArea;
-                // }
+                // // }
+                for (let i = 0; i < data.categories.length; i++) {
+                    
+                    if(data.categories[i].name == 'Cost of Living')
+                        document.querySelector('#presentLoc_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Safety')
+                        document.querySelector('#presentLoc_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Healthcare')
+                        document.querySelector('#presentLoc_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Economy')
+                        document.querySelector('#presentLoc_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Leisure & Culture')
+                        document.querySelector('#presentLoc_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                }
+                    document.querySelector('#presentLoc_OverallScore').textContent = data.teleport_city_score.toFixed(2);
+            
+                // Chose to use Shang's fore loop to populate website with this data instead of following six lines of script:
 
-                            
-
-                presentLoc_CostLivingTP.textContent = data.categories[1].score_out_of_10;
-                presentLoc_SafetyTP.textContent = data.categories[7].score_out_of_10;
-                presentLoc_HealthCareTP.textContent = data.categories[8].score_out_of_10;
-                presentLoc_EconomyTP.textContent = data.categories[11].score_out_of_10;
-                presentLoc_LeisureCultureTP.textContent = data.categories[14].score_out_of_10;
-                presentLoc_OverallScoreTP.textContent = data.teleport_city_score;
+                // presentLoc_CostLivingTP.textContent = data.categories[1].score_out_of_10;
+                // presentLoc_SafetyTP.textContent = data.categories[7].score_out_of_10;
+                // presentLoc_HealthCareTP.textContent = data.categories[8].score_out_of_10;
+                // presentLoc_EconomyTP.textContent = data.categories[11].score_out_of_10;
+                // presentLoc_LeisureCultureTP.textContent = data.categories[14].score_out_of_10;
+                // presentLoc_OverallScoreTP.textContent = data.teleport_city_score;
                 
                 });
             } else {
@@ -188,11 +209,11 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
                 //     citySearched.textContent = teleportUrbanArea_2;
                 // }
 
-                citySearched_CostLivingIP.textContent = data.categories[1].score_out_of_10;
-                citySearched_SafetyIP.textContent = data.categories[7].score_out_of_10;
-                citySearched_HealthCareIP.textContent = data.categories[8].score_out_of_10;
-                citySearched_EconomyIP.textContent = data.categories[11].score_out_of_10;
-                citySearched_LeisureCultureIP.textContent = data.categories[14].score_out_of_10
+                citySearched_CostLivingTP.textContent = data.categories[1].score_out_of_10;
+                citySearched_SafetyTP.textContent = data.categories[7].score_out_of_10;
+                citySearched_HealthCareTP.textContent = data.categories[8].score_out_of_10;
+                citySearched_EconomyTP.textContent = data.categories[11].score_out_of_10;
+                citySearched_LeisureCultureTP.textContent = data.categories[14].score_out_of_10
                 citySearched_OverallScoreTP.textContent = data.teleport_city_score;
 
                 });
@@ -219,9 +240,11 @@ fetch(url)
     .then(function(response) {  
         if (response.ok) {  
             response.json().then(function(data) {
+                
                 // extracting important information from data
                 let teleportCitiesArray =data._links['ua:item'];
                 // Using a FOR LOOP to create objects
+                console.log("urban areas data:  ", data);
                 for (let i = 0; i < teleportCitiesArray.length; i++) {
                     availTelCitiesObj[teleportCitiesArray[i].name] = null
                     
