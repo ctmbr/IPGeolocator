@@ -209,12 +209,29 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
                 //     citySearched.textContent = teleportUrbanArea_2;
                 // }
 
-                citySearched_CostLivingTP.textContent = data.categories[1].score_out_of_10;
-                citySearched_SafetyTP.textContent = data.categories[7].score_out_of_10;
-                citySearched_HealthCareTP.textContent = data.categories[8].score_out_of_10;
-                citySearched_EconomyTP.textContent = data.categories[11].score_out_of_10;
-                citySearched_LeisureCultureTP.textContent = data.categories[14].score_out_of_10
-                citySearched_OverallScoreTP.textContent = data.teleport_city_score;
+                for (let i = 0; i < data.categories.length; i++) {
+                    
+                    if(data.categories[i].name == 'Cost of Living')
+                        document.querySelector('#citySearched_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Safety')
+                        document.querySelector('#citySearched_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Healthcare')
+                        document.querySelector('#citySearched_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Economy')
+                        document.querySelector('#citySearched_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                    if(data.categories[i].name == 'Leisure & Culture')
+                        document.querySelector('#citySearched_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2);
+                }
+                    document.querySelector('#citySearched_OverallScore').textContent = data.teleport_city_score.toFixed(2);
+
+
+                // Replaced following six lines of code with Shang's logic
+                // citySearched_CostLivingTP.textContent = data.categories[1].score_out_of_10;
+                // citySearched_SafetyTP.textContent = data.categories[7].score_out_of_10;
+                // citySearched_HealthCareTP.textContent = data.categories[8].score_out_of_10;
+                // citySearched_EconomyTP.textContent = data.categories[11].score_out_of_10;
+                // citySearched_LeisureCultureTP.textContent = data.categories[14].score_out_of_10
+                // citySearched_OverallScoreTP.textContent = data.teleport_city_score;
 
                 });
             } else {
