@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Geolocator</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./Assets/css/style.css" />
+</head>
+<body img class="material boxed ">
+
+    <header class="card center-align teal darken-4">
+        <h1 class="center-align white-text">Quality is All!</h1>
+        <div class="card-panel center-align teal lighten-2">
+            <p>Want data on the Quality of life in the major urban area closest to your location?</p>
+            <p>We’ve got you covered!</p>
+            <p>You can also check the quality of life at other locations.</p>
+        </div>
+    </header>
+
+    <div class="container info-section">
+        <div class="row flex">
+            <div class="col s12 m6 l4 teal darken-4 pl-15 pr-15">
+                <div class="">
+                    <h3 class="card-title white-text">Your Location Info</h3>
+                    <div class="card-content card-panel teal lighten-2">
+                        <table>
+                            <tr>
+                                <th>State:</th>
+                                <td id="stateName">Washington</td>
+                            </tr>
+                            <tr>
+                                <th>City:</th>
+                                <td id="cityName">Seattle</td>
+                            </tr>
+                            <tr>
+                                <th>Zip Code:</th>
+                                <td id="zipCode">98115</td>
+                            </tr>
+                            <tr>
+                                <th>Latitude:</th>
+                                <td id="lat">47</td>
+                            </tr>
+                            <tr>
+                                <th>Longitude:</th>
+                                <td id="lon">-122</td>
+                            </tr>
+                            <tr>
+                                <th>Population:</th>
+                                <td id="population">684,451</td>
+                            </tr>
+                            <tr>
+                                <th>Your Current IP Address is: </th>
+                                <td id="ISP" class="truncate">2601.555555.55555.555555</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 teal darken-4 pl-15 pr-15">
+                <div class="">
+                    <h3 id="nearestTeleportCity" class="card-title white-text">
+                        Quality of Life for your urban area: <span id="nearest-Teleport-City"></span>
+                    </h3>
+                    <div class="card-content card-panel teal lighten-2">
+                        <table>
+                            <tr>
+                                <th>Cost of Living:</th>
+                                <td id="presentLoc_CostLiving"></td>
+                            </tr>
+                            <tr>
+                                <th>Safety:</th>
+                                <td id="presentLoc_Safety"></td>
+                            </tr>
+                            <tr>
+                                <th>Health Care:</th>
+                                <td id="presentLoc_HealthCare"></td>
+                            </tr>
+                            <tr>
+                                <th>Economy:</th>
+                                <td id="presentLoc_Economy"></td>
+                            </tr>
+                            <tr>
+                                <th>Leisure & Culture:</th>
+                                <td id="presentLoc_LeisureCulture"></td>
+                            </tr>
+                            <tr>
+                                <th>Overall Score:</th>
+                                <td> <span id="presentLoc_OverallScore"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 offset-m3 teal darken-4 pl-15 pr-15">
+                <div class="">
+                    <h3 class="card-title white-text">
+                        Quality of life for <span id="city-selected-from-dropdown">city searched</span>
+                    </h3>
+                    <div class="card-content card-panel teal lighten-2">
+                        <table>
+                            <tr>
+                                <th>Cost of Living:</th>
+                                <td id="citySearched_CostLiving"></td>
+                            </tr>
+                            <tr>
+                                <th>Safety:</th>
+                                <td id="citySearched_Safety"></td>
+                            </tr>
+                            <tr>
+                                <th>Health Care:</th>
+                                <td <span id="citySearched_HealthCare"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Economy:</th>
+                                <td> <span id="citySearched_Economy"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Leisure & Culture:</th>
+                                <td> <span id="citySearched_LeisureCulture"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Overall Score:</th>
+                                <td><span id="citySearched_OverallScore"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Materialize Autocomplete search bar -->
+    <div class="container">
+        <div class="card row purple lighten-5">
+            <div class="input-field col s12">
+                <i class="material-icons prefix teal-text">location_city</i>
+                <input type="text" id="autocomplete-input" class="autocomplete teal-text">
+                <label class="teal-text" for="autocomplete-input">Search Quality of Life Scores:</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h5>Your search history</h5>
+                <div class="collection" id="search-history">
+                    <!-- <a href="javascript:void(0);" class="collection-item"><span class="badge">12</span>Delhi</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div>Search History: local storage container</div> -->
+    
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2022 IP Geolocator
+                <a class="grey-text text-lighten-4 right" href="./aboutUs.html">About Us</a>
+            </div>
+        </div>
+    </footer>
+    <!-- We need to add JQuery link to HTML file if we want Materialize drop down menu to work, because materialize evidently overwrites HTML select tag, which is needed to make a basic HTML r -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./Assets/js/script.js" type="text/javascript"></script>
+</body>
+</html>
