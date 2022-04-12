@@ -2,7 +2,7 @@
 
 ## Quality of life by location
 
-## [API used](https://github.com/ctmbr/IPGeolocator/blob/develop/README.md#api-used)
+## [API used](https://github.com/ctmbr/IPGeolocator/blob/develop/README.md#api-used-1)
 
 [Project Overview](https://github.com/ctmbr/IPGeolocator/tree/shangfii-patch-1#description-overview-ipgeolocator) 
 
