@@ -34,6 +34,8 @@ var citySearched_OverallScoreTP = document.querySelector('#citySearched_OverallS
 // Fetch call at PageLoad to obtain user's IP address and relevant information
 var freeGeoIP = 'https://api.freegeoip.app/json/?apikey=74824920-b48a-11ec-aeb7-87f5f0610281';
 
+var pageLoad = true, selectedCity = '';
+
 fetch(freeGeoIP)
     .then(function (response) {
         if (response.ok) {
@@ -94,10 +96,12 @@ var getNearestUrbanArea = function(cityGeonameIDlink){
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
+                    console.log('hello', data);
                 //Getting population number for IP address city and displaying to HTML 
+                nearestTPCity.textContent = data._links['city:urban_area'].name;
                 populationIP.textContent = data.population
                 // Saving nearest Teleport Urban Area to a variable
-                var urbanArea = data._links['city:urban_area'].href
+                var urbanArea = data._links['city:urban_area'].href;
                 //Passing urban area/city to next function    
                 getUrbanAreaQualOfLifeScores(urbanArea);
                 });
@@ -224,7 +228,30 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
                 }
                     document.querySelector('#citySearched_OverallScore').textContent = data.teleport_city_score.toFixed(2);
 
-
+                // 
+                if(!pageLoad){
+                    var cookie_data = '', found = false, new_cookie_data = '';
+                    if(getCookie('search-history')){
+                        cookie_data = getCookie('search-history');
+                        cookie_data = cookie_data.split(':');
+                        for (var i = 0; i < cookie_data.length; i++) {
+                            if(cookie_data[i] != ''){
+                                var x = cookie_data[i].split('=');
+                                if(x[0] == selectedCity){
+                                    // found = true;
+                                    // new_cookie_data += x[0] + '=' + data.teleport_city_score.toFixed(2) + ':';
+                                }else{
+                                    new_cookie_data += x[0] + '=' + x[1] + ':';
+                                }
+                            }
+                        }
+                    }
+                    if(!found){
+                        new_cookie_data += selectedCity + '=' + data.teleport_city_score.toFixed(2) + ':';
+                    }
+                    setCookie('search-history', new_cookie_data, 365);
+                    setSearchHistory();
+                }
                 // Replaced following six lines of code with Shang's logic
                 // citySearched_CostLivingTP.textContent = data.categories[1].score_out_of_10;
                 // citySearched_SafetyTP.textContent = data.categories[7].score_out_of_10;
@@ -303,8 +330,12 @@ var autoCompleListofCities = function() {
         }
         // var hrefCity = availTelCitiesHref.city;
         // passing the city's url to function that will fetch quality of life scores.
-        if(hrefCity != '')
+        if(hrefCity != ''){
+            pageLoad = false;
+            selectedCity = city;
+            citySearched.textContent = city;
             getSearchedUrbanAreaQualOfLifeScores(hrefCity);
+        }
         
         }
     });
@@ -341,3 +372,59 @@ document.addEventListener('DOMContentLoaded', autoCompleListofCities);
 //   $('.dropdown-trigger').dropdown();
 
 
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setSearchHistory(){
+    document.getElementById('search-history').innerHTML = '';
+    if(getCookie('search-history')){
+        var cookie_data = getCookie('search-history'), html = '';
+        cookie_data = cookie_data.split(':');
+        for (var i = cookie_data.length - 1; i >= 0; i--) {
+            if(cookie_data[i] != ''){
+                var d = cookie_data[i].split('=');
+                html += '<a href="javascript:void(0);" onclick="selectHistoryCity(\''+d[0]+'\');" class="collection-item"><span class="badge">'+d[1]+'/100</span>'+d[0]+'</a>';
+            }
+        }
+        document.getElementById('search-history').innerHTML = html;
+    }
+}
+
+setSearchHistory();
+
+function selectHistoryCity(city){
+    var hrefCity = '';
+    for (var key in availTelCitiesHref) {
+      if (availTelCitiesHref.hasOwnProperty(key))
+        if(city == key)
+            hrefCity = availTelCitiesHref[key];
+    }
+    // var hrefCity = availTelCitiesHref.city;
+    // passing the city's url to function that will fetch quality of life scores.
+    if(hrefCity != ''){
+        pageLoad = false;
+        selectedCity = city;
+        citySearched.textContent = city;
+        getSearchedUrbanAreaQualOfLifeScores(hrefCity);
+    }
+}
