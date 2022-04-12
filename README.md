@@ -45,3 +45,7 @@ Visual Studio Code is a code editor redefined and optimized for building and deb
 
 Download visual studio code or use your favorite editor,Then using the command line clone this repository to your computer and start changing as you wish.
 You can also just fork this repo to your github to make changes.
+
+## API used
+1. IP locator (to pull location by IP)
+2. teleport  (to get life quality information)
