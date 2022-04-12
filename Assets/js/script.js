@@ -153,17 +153,17 @@ var getUrbanAreaQualOfLifeScores = function(urbanArea){
                 for (let i = 0; i < data.categories.length; i++) {
                     
                     if(data.categories[i].name == 'Cost of Living')
-                        document.querySelector('#presentLoc_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#presentLoc_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Safety')
-                        document.querySelector('#presentLoc_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#presentLoc_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Healthcare')
-                        document.querySelector('#presentLoc_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#presentLoc_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Economy')
-                        document.querySelector('#presentLoc_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#presentLoc_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Leisure & Culture')
-                        document.querySelector('#presentLoc_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#presentLoc_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2);
                 }
-                    document.querySelector('#presentLoc_OverallScore').textContent = data.teleport_city_score.toFixed(2) +  " / 100";
+                    document.querySelector('#presentLoc_OverallScore').textContent = data.teleport_city_score.toFixed(2);
             
                 // Chose to use Shang's fore loop to populate website with this data instead of following six lines of script:
 
@@ -216,17 +216,17 @@ var getSearchedUrbanAreaQualOfLifeScores = function(urbanArea){
                 for (let i = 0; i < data.categories.length; i++) {
                     
                     if(data.categories[i].name == 'Cost of Living')
-                        document.querySelector('#citySearched_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#citySearched_CostLiving').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Safety')
-                        document.querySelector('#citySearched_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#citySearched_Safety').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Healthcare')
-                        document.querySelector('#citySearched_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#citySearched_HealthCare').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Economy')
-                        document.querySelector('#citySearched_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#citySearched_Economy').textContent = data.categories[i].score_out_of_10.toFixed(2);
                     if(data.categories[i].name == 'Leisure & Culture')
-                        document.querySelector('#citySearched_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2) + " / 10";
+                        document.querySelector('#citySearched_LeisureCulture').textContent = data.categories[i].score_out_of_10.toFixed(2);
                 }
-                    document.querySelector('#citySearched_OverallScore').textContent = data.teleport_city_score.toFixed(2) + " / 100";
+                    document.querySelector('#citySearched_OverallScore').textContent = data.teleport_city_score.toFixed(2);
 
                 // 
                 if(!pageLoad){
