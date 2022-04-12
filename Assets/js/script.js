@@ -96,7 +96,7 @@ var getNearestUrbanArea = function(cityGeonameIDlink){
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log('hello', data);
+                    // console.log('hello', data);
                 //Getting population number for IP address city and displaying to HTML 
                 nearestTPCity.textContent = data._links['city:urban_area'].name;
                 populationIP.textContent = data.population
