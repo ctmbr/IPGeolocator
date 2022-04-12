@@ -51,3 +51,7 @@ You can also just fork this repo to your github to make changes.
 ## API used
 1. IP locator (to pull location by IP)
 2. teleport  (to get life quality information)
+
+## Presentation slides 
+
+[Click here to see our presentation](https://docs.google.com/presentation/d/1kIqML2JvYoGsWJYgMt682TbdT2P3xVWCe_8pAlouxJg/edit#slide=id.g120fc05f28b_0_21) 
