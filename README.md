@@ -2,6 +2,8 @@
 
 ## Quality of life by location
 
+## [API used](https://github.com/ctmbr/IPGeolocator/blob/develop/README.md#api-used)
+
 [Project Overview](https://github.com/ctmbr/IPGeolocator/tree/shangfii-patch-1#description-overview-ipgeolocator) 
 
 [Techlogies Used](https://github.com/ctmbr/IPGeolocator/blob/shangfii-patch-1/README.md#technologies-used)
