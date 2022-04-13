@@ -1,6 +1,4 @@
-## Quality of life by location
-
-## Quality of life by location
+## Quality of Life by Location
 
 ## [API used](https://github.com/ctmbr/IPGeolocator/blob/develop/README.md#api-used-1)
 
